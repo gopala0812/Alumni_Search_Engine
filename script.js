@@ -1,6 +1,6 @@
 // script.js - single file for all pages
 const backendURL ="https://alumni-search-engine-backend-wip4.onrender.com"
-const FETCH_TIMEOUT = 10000;
+const FETCH_TIMEOUT = 60000; // ⏱ increased to 1 minute (was 10000)
 
 // ---------- helpers ----------
 function $(id){ return document.getElementById(id); }
@@ -211,12 +211,8 @@ async function downloadById(type='json'){
 
 // ---------- init ----------
 (function init(){
-  // wire common element listeners already set inline in HTML; add fallbacks
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
-
-  // try to fetch stats on load if stats elements present
   if($('total') || $('recent')) fetchStats();
-
-  // ensure sidebar initial state on small screens
   if(window.innerWidth <= 900) hideSidebar();
 })();
+
