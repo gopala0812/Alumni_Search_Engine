@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Search - Alumni Search Engine</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button id="hamburger" class="hamburger" aria-label="Open menu">☰</button>
+    <h1 class="title">🎓 Alumni Search Engine</h1>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌓</button>
+  </header>
+
+  <nav id="sidebar" class="sidebar hidden">
+    <div class="sidebar-head">Alumni Engine</div>
+    <a href="index.html" class="nav-link">🔎 Search</a>
+    <a href="add.html" class="nav-link">➕ Add (Bulk)</a>
+    <a href="settings.html" class="nav-link">⚙️ Settings</a>
+    <button id="closeSidebar" class="close-sidebar">✕</button>
+  </nav>
+
+  <main class="main">
+    
+
+    <section class="search-panel">
+      <h2>Search Alumni</h2>
+      <div class="form-row">
+        <input id="s_name" type="text" placeholder="Name (partial allowed)">
+        <input id="s_department" type="text" placeholder="Department">
+        <input id="s_year" type="number" placeholder="Batch Year">
+        <button id="searchBtn">Search</button>
+      </div>
+      <div id="searchStatus" class="status"></div>
+      <div id="results" class="results"></div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button id="modalClose" class="modal-close">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // page-specific wiring
+    document.getElementById('searchBtn').addEventListener('click', async () => {
+      await searchPageSearch();
+      closeSidebarIfMobile();
+    });
+    ['s_name','s_department','s_year'].forEach(id=>{
+      const el = document.getElementById(id);
+      el?.addEventListener('keyup', (e)=>{ if(e.key==='Enter') document.getElementById('searchBtn').click(); });
+    });
+
+    
+  </script>
+</body>
+</html>
